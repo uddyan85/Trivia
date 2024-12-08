@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-sacle=1.0">
+	<title> Cpp Quiz Start </title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="main-div">
+		<div class="quiz-app">
+			<div class="start" id="start" style="display:block;">
+				<img src="images/Cpp.jpeg" height="120px" ,width="120px" class=il>
+
+				<h1 class="app"> Quiz Starting... </h1>
+				<!-- <p id="code">&copy; Made By Uddyan Sahu </p> -->
+			</div>
+			<div class="quiz" id="quiz-screen" style="display: none;">
+
+				<div class="time-bar">
+					<div class="time-left" id="timeLeft">
+					</div>
+				</div>
+				<div class="question-no">
+					<h3 class="q-text">Questions <span id="currentQuestion">1</span>/<span id="totalQuestion">20</span>
+					</h3>
+					<!-- <h3 id="dots">.................................................................</h3> -->
+					<h3 id="dots">___________________________</h3>
+				</div>
+				<div class="qus">
+					<h1 id="question">Who is the first child of the john doe?</h1>
+				</div>
+				<div class="choices">
+					<button class="btn" id="opt1">Mark Angel</button>
+					<button class="btn" id="opt2">Mark Angel</button>
+					<button class="btn" id="opt3">Mark Angel</button>
+					<button class="btn" id="opt4">Mark Angel</button>
+				</div>
+				<div class="next-btn">
+					<button id="next">Next </button>
+				</div>
+			</div>
+			<div class="result" id="resultScreen" style="display:none;">
+				<img src="images/trophy.png" height="120px" width="120px" class="il">
+				<h1 class="app"> Score: <span id="score">6</span></h1>
+				<a href="index.html" class="btn-home">Home</a>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+
+		var currentQuestion = 0;
+		var totalScore = 0;
+		var cQuestion = document.getElementById('currentQuestion');
+		var totalQuestions = document.getElementById('totalQuestion');
+		var splashScreen = document.getElementById('start');
+		var quizScreen = document.getElementById('quiz-screen');
+		var x = 0;
+		var resultScreen = document.getElementById('resultScreen');
+		var timeLeft = document.getElementById('timeLeft');
+		var score = document.getElementById('score');
+		var question = document.getElementById('question');
+		var opt1 = document.getElementById('opt1');
+		var opt2 = document.getElementById('opt2');
+		var opt3 = document.getElementById('opt3');
+		var opt4 = document.getElementById('opt4');
+		var btn = document.getElementsByClassName('btn');
+		var next = document.getElementById('next');
+		var quizQuestions = [
+			{
+				question: "Which of the following is the correct identifier?",
+				choice1: "$var_name",
+				choice2: "VAR_123",
+				choice3: "varname@",
+				choice4: "None of the above",
+				ans: "VAR_123",
+			},
+			{
+				question: " Which of the following is the address operator?",
+				choice1: "@",
+				choice2: "#",
+				choice3: "&",
+				choice4: "%",
+				ans: "&",
+			},
+			{
+				question: "Which  features must be supported by any programming language to become a pure OOPs ",
+				choice1: "Encapsulation",
+				choice2: "Inheritance",
+				choice3: "Polymorphism",
+				choice4: "All of the above",
+				ans: "All of the above",
+			},
+
+			{
+				question: " The programming language that has the ability to create new data types is called___.",
+				choice1: "Overloaded",
+				choice2: "Encapsulated",
+				choice3: "Reprehensible",
+				choice4: "Extensible",
+				ans: "Extensible",
+			},
+			{
+				question: "Who is  the original creator of the C++ language?",
+				choice1: "Dennis Ritchie",
+				choice2: "Ken Thompson",
+				choice3: "Bjarne Stroustrup",
+				choice4: "Brian Kernighan",
+				ans: "Bjarne Stroustrup",
+			},
+			{
+				question: "Which  is the correct syntax to read the single character to console in the C++ language?",
+				choice1: "get(ch)",
+				choice2: "Read ch()",
+				choice3: "Getline vh()",
+				choice4: "Scanf(ch)",
+				ans: "get(ch)",
+			},
+
+			{
+				question: "The C++ language is ______ object-oriented language.",
+				choice1: "Pure Object oriented",
+				choice2: "Semi Object-oriented or Partial Object-oriented",
+				choice3: "Not Object oriented",
+				choice4: "None of Above",
+				ans: "Semi Object-oriented or Partial Object-oriented",
+			},
+
+
+			{
+				question: "Which syntax is correct to create a single-line comment in the C++ program?",
+				choice1: "//Comment",
+				choice2: "/Comment/",
+				choice3: "Comment//",
+				choice4: "None of the above",
+				ans: "//Comment",
+			},
+
+
+			{
+				question: "C++ is a ___ type of language.",
+				choice1: "High-level Language",
+				choice2: "Low-level language",
+				choice3: "Middle-level language",
+				choice4: "None of the above",
+				ans: "Middle-level language",
+			},
+
+			{
+				question: " For inserting a new line in C++ program, which one of the following statements can be used?",
+				choice1: "n",
+				choice2: "r",
+				choice3: "a",
+				choice4: "None of the above",
+				ans: "n",
+			},
+
+			{
+				question: " Which of the following refers to characteristics of an array?",
+				choice1: "An array is a set of similar data items",
+				choice2: "An array is a set of distinct data items",
+				choice3: "An array can hold different types of datatypes",
+				choice4: "None of the above",
+				ans: "An array is a set of similar data items",
+			}
+		];
+		function nextQuestion(no) {
+			Inter(30000);
+			cQuestion.textContent = " " + (no + 1);
+			totalQuestions.textContent = " " + quizQuestions.length
+			console.log("number" + no);
+			question.textContent = quizQuestions[no].question;
+			opt1.textContent = quizQuestions[no].choice1
+			opt2.textContent = quizQuestions[no].choice2
+			opt3.textContent = quizQuestions[no].choice3
+			opt4.textContent = quizQuestions[no].choice4;
+		}
+		var z = setInterval(function () {
+			if (x == 1) {
+				clearInterval(z);
+				splashScreen.style.display = "none";
+				quizScreen.style.display = "block";
+				nextQuestion(currentQuestion);
+
+			}
+			x++;
+		}, 2000);
+
+		for (var i = 0; i < btn.length; i++) {
+			btn[i].onclick = function () {
+				if (this.textContent == quizQuestions[currentQuestion].ans) {
+					totalScore++;
+					if (currentQuestion < 10) {
+						clearInterval(bar);
+						currentQuestion++;
+						nextQuestion(currentQuestion);
+						console.log(totalScore);
+					}
+
+					else {
+						endScreen();
+					}
+
+				}
+				else {
+					if (currentQuestion < 10) {
+						currentQuestion++;
+						clearInterval(bar);
+
+						nextQuestion(currentQuestion);
+						console.log(totalScore);
+
+					}
+					else {
+						endScreen();
+					}
+				}
+
+			}
+		}
+		var bar;
+		function endScreen() {
+			quizScreen.style.display = "none";
+			resultScreen.style.display = "block";
+			score.textContent = totalScore;
+		}
+		function Inter(set) {
+			var statusTime = set;
+			timeLeft.style.width = (statusTime / 30000) * 100 + "%";
+			bar = setInterval(function () {
+				if (statusTime == 0) {
+					clearInterval(bar);
+					if (currentQuestion < 10) {
+						currentQuestion++;
+						nextQuestion(currentQuestion);
+					}
+					else {
+						endScreen();
+					}
+				}
+				timeLeft.style.width = (statusTime / 30000) * 100 + "%";
+				statusTime = statusTime - 1000;
+			}, 1000);
+		}
+		next.onclick = function () {
+			if (currentQuestion < 10) {
+				currentQuestion++;
+				nextQuestion(currentQuestion);
+
+			}
+			else {
+				endScreen();
+			}
+		}
+
+	</script>
+
+</body>
+
+</html>

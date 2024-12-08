@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-sacle=1.0">
+	<title> C Quiz Start </title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="main-div">
+		<div class="quiz-app">
+			<div class="start" id="start" style="display:block;">
+				<img src="images/C.jpeg" height="120px" ,width="120px" class=il>
+
+				<h1 class="app"> Quiz Starting... </h1>
+				<!-- <p id="code">&copy; Made By Uddyan Sahu </p> -->
+			</div>
+			<div class="quiz" id="quiz-screen" style="display: none;">
+				<div class="time-bar">
+					<div class="time-left" id="timeLeft">
+					</div>
+				</div>
+				<div class="question-no">
+					<h3 class="q-text">Questions <span id="currentQuestion">1</span>/<span id="totalQuestion">20</span>
+					</h3>
+					<!-- <h3 id="dots">...........................</h3> -->
+					<h3 id="dots">___________________________</h3>
+				</div>
+				<div class="qus">
+					<h1 id="question">Who is the first child of the john doe?</h1>
+				</div>
+				<div class="choices">
+					<button class="btn" id="opt1">Mark Angel</button>
+					<button class="btn" id="opt2">Mark Angel</button>
+					<button class="btn" id="opt3">Mark Angel</button>
+					<button class="btn" id="opt4">Mark Angel</button>
+				</div>
+				<div class="next-btn">
+					<button id="next">Next </button>
+				</div>
+			</div>
+			<div class="result" id="resultScreen" style="display:none;">
+				<img src="images/trophy.png" height="120px" width="120px" class="il">
+				<h1 class="app"> Score: <span id="score">6</span></h1>
+				<a href="index.html" class="btn-home">Home</a>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+
+		var currentQuestion = 0;
+		var totalScore = 0;
+		var cQuestion = document.getElementById('currentQuestion');
+		var totalQuestions = document.getElementById('totalQuestion');
+		var splashScreen = document.getElementById('start');
+		var quizScreen = document.getElementById('quiz-screen');
+		var x = 0;
+		var resultScreen = document.getElementById('resultScreen');
+		var timeLeft = document.getElementById('timeLeft');
+		var score = document.getElementById('score');
+		var question = document.getElementById('question');
+		var opt1 = document.getElementById('opt1');
+		var opt2 = document.getElementById('opt2');
+		var opt3 = document.getElementById('opt3');
+		var opt4 = document.getElementById('opt4');
+		var btn = document.getElementsByClassName('btn');
+		var next = document.getElementById('next');
+		var quizQuestions = [
+			{
+				question: "What is the 16-bit compiler allowable range for integer constants?",
+				choice1: "-3.4e38 to 3.4e38",
+				choice2: "-32767 to 32768",
+				choice3: "-32668 to 32667",
+				choice4: "-32768 to 32767",
+				ans: "-32768 to 32767",
+
+			},
+			{
+				question: "What is required in each C program?",
+				choice1: "The program must have at least one function.",
+				choice2: "The program does not require any function.",
+				choice3: "Input data",
+				choice4: "Output data",
+				ans: "The program must have at least one function.",
+			},
+			{
+				question: "What is a lint? ",
+				choice1: "C compiler",
+				choice2: "C compiler",
+				choice3: "Analyzing tool",
+				choice4: "C interpreter",
+				ans: "Analyzing tool",
+			},
+
+			{
+				question: "How many instances of a class can be declared?",
+				choice1: "1",
+				choice2: "10",
+				choice3: "As per required",
+				choice4: "None of these",
+				ans: "As per required",
+			},
+			{
+				question: "What is the output of this statement printf(%d, (a++))?",
+				choice1: "The value of (a + 1)",
+				choice2: "The current value of a",
+				choice3: "Error message",
+				choice4: "Error message",
+				ans: "The current value of a",
+			},
+			{
+				question: "Why is a macro used in place of a function?",
+				choice1: "It reduces execution time.",
+				choice2: "It reduces code size.",
+				choice3: "It increases execution time.",
+				choice4: "It increases code size.",
+				ans: "It increases code size.",
+			},
+
+			{
+				question: "In the C language, the constant is defined _______.",
+				choice1: "Before main",
+				choice2: "After main",
+				choice3: "Anywhere, but starting on a new line.",
+				choice4: "None all above",
+				ans: "Anywhere, but starting on a new line.",
+			},
+
+
+			{
+				question: "Which one of the following is a loop construct that will always be executed once?",
+				choice1: "do-while",
+				choice2: "for",
+				choice3: "while",
+				choice4: "switch",
+				ans: "do-while",
+			},
+
+			{
+				question: " How many characters can a string hold when declared as follows: char name[20]:",
+				choice1: "18",
+				choice2: "19",
+				choice3: "20",
+				choice4: "21",
+				ans: "20",
+			},
+
+			{
+				question: "Directives are translated by the",
+				choice1: "Pre-processor",
+				choice2: "Compiler",
+				choice3: "Editor",
+				choice4: "Linker",
+				ans: "Pre-processor",
+			},
+			{
+				question: "How many bytes does int = D use?",
+				choice1: "0",
+				choice2: "1",
+				choice3: "2 or 4",
+				choice4: "5",
+				ans: "2 or 4",
+			}
+		];
+
+		// function
+		function nextQuestion(no) {
+			Inter(30000);
+			cQuestion.textContent = " " + (no + 1);
+			totalQuestions.textContent = " " + quizQuestions.length
+			console.log("number" + no);
+			question.textContent = quizQuestions[no].question;
+			opt1.textContent = quizQuestions[no].choice1
+			opt2.textContent = quizQuestions[no].choice2
+			opt3.textContent = quizQuestions[no].choice3
+			opt4.textContent = quizQuestions[no].choice4;
+		}
+
+		var z = setInterval(function () {
+			if (x == 1) {
+				clearInterval(z);
+				splashScreen.style.display = "none";
+				quizScreen.style.display = "block";
+				nextQuestion(currentQuestion);
+			}
+			x++;
+		}, 3000);
+
+		for (var i = 0; i < btn.length; i++) {
+			btn[i].onclick = function () {
+				if (this.textContent == quizQuestions[currentQuestion].ans) {
+					totalScore++;
+					if (currentQuestion < 10) {
+						clearInterval(bar);
+						currentQuestion++;
+						nextQuestion(currentQuestion);
+						console.log(totalScore);
+					}
+
+					else {
+						endScreen();
+					}
+
+				}
+				else {
+					if (currentQuestion < 10) {
+						currentQuestion++;
+						clearInterval(bar);
+
+						nextQuestion(currentQuestion);
+						console.log(totalScore);
+
+					}
+					else {
+						endScreen();
+					}
+				}
+
+			}
+		}
+		
+		var bar;
+		function endScreen() {
+			quizScreen.style.display = "none";
+			resultScreen.style.display = "block";
+			score.textContent = totalScore;
+		}
+		function Inter(set) {
+			var statusTime = set;
+			timeLeft.style.width = (statusTime / 30000) * 100 + "%";
+			bar = setInterval(function () {
+				if (statusTime == 0) {
+					clearInterval(bar);
+					if (currentQuestion < 10) {
+						currentQuestion++;
+						nextQuestion(currentQuestion);
+					}
+					else {
+						endScreen();
+					}
+				}
+				timeLeft.style.width = (statusTime / 30000) * 100 + "%";
+				statusTime = statusTime - 1000;
+			}, 1000);
+		}
+		next.onclick = function () {
+			if (currentQuestion < 10) {
+				currentQuestion++;
+				nextQuestion(currentQuestion);
+
+			}
+			else {
+				endScreen();
+			}
+		}
+
+	</script>
+
+</body>
+
+</html>
